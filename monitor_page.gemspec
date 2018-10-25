@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.authors     = ["Chris Gooley"]
   s.email       = ["chris@gooddogdesign.com"]
   s.homepage    = ""
-  s.summary     = "Generates a page with a configurable set of status checks"
+  s.summary     = "A gem to view status checks of multiple services from a single page."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.2.0"
+  s.add_dependency "rails", "~> 5.0"
 end
