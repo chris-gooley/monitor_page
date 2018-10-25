@@ -8,9 +8,9 @@ Create an initializer and setup your checks. Each check should have a `pass` and
 MonitorPage.configure do
   check 'Sidekiq' do
     if Sidekiq::Queue.all.select{ |q| q.size > 50 }.any?
-      pass
-    else
       error "Sidekiq has too many jobs"
+    else
+      pass
     end
   end
 
