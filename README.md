@@ -6,6 +6,8 @@ Create an initializer and setup your checks. Each check should have a `pass` and
 
 ```ruby
 MonitorPage.configure do
+  permit '1.1.1.1', '1.1.2.2' # optional, will be available everywhere if left out
+
   check 'Sidekiq' do
     if Sidekiq::Queue.all.select{ |q| q.size > 50 }.any?
       error "Sidekiq has too many jobs"

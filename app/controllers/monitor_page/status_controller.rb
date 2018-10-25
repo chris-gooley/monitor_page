@@ -5,6 +5,10 @@ module MonitorPage
     layout 'monitor_page/application'
 
     def index
+      if MonitorPage.allowed_ips && !MonitorPage.allowed_ips.include?(request.remote_ip)
+        render html: 'Forbidden' and return
+      end
+
       check_results = MonitorPage.checks.map{|c| c.call }
 
       overall_pass = check_results.inject(true) { |res, check| res && check[:result] }

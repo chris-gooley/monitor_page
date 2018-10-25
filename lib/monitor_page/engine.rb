@@ -7,7 +7,7 @@ module MonitorPage
 
 
   class << self
-    attr_accessor :checks
+    attr_accessor :checks, :allowed_ips
 
     def checks
       @checks || []
@@ -19,6 +19,10 @@ module MonitorPage
 
     def check(label, &block)
       self.checks += [Proc.new { StatusCheck.create_check(label, &block) }]
+    end
+
+    def permit(ips)
+      self.allowed_ips = ips.is_a?(String) ? ips.split(/,\s?/) : ips
     end
   end
 
