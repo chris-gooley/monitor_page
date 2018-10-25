@@ -5,7 +5,7 @@ require "monitor_page/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "monitor-page"
+  s.name        = "monitor_page"
   s.version     = MonitorPage::VERSION
   s.authors     = ["Chris Gooley"]
   s.email       = ["chris@gooddogdesign.com"]

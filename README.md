@@ -46,7 +46,7 @@ Overall: Failed
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'monitor-page'
+gem 'monitor_page'
 ```
 
 And then execute:
@@ -56,7 +56,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install monitor-page
+$ gem install monitor_page
 ```
 
 ## License
