@@ -1,10 +1,9 @@
-module MonitorPage
+require "ipaddr"
 
+module MonitorPage
   class Engine < ::Rails::Engine
     isolate_namespace MonitorPage
-
   end
-
 
   class << self
     attr_accessor :checks, :allowed_ips
@@ -22,7 +21,14 @@ module MonitorPage
     end
 
     def permit(ips)
-      self.allowed_ips = ips.is_a?(String) ? ips.split(/,\s?/) : ips
+      ip_ranges = ips.is_a?(String) ? ips.split(/,\s?/) : ips
+
+      ip_ranges.each do |ip|
+        if ip.match(/-/)
+
+        end
+      end
+      self.allowed_ips
     end
   end
 
