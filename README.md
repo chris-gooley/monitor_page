@@ -6,7 +6,9 @@ Create an initializer and setup your checks. Each check should have a `pass` and
 
 ```ruby
 MonitorPage.configure do
-  permit '1.1.1.1', '1.1.2.2' # optional, will be available everywhere if left out
+  # Whitelist IPs that have access to the status page. Can be a single IP or of CIDR notation.
+  # Optional: if left out it will be publically available
+  permit '1.1.1.1', '1.1.2.0/24'
 
   check 'Sidekiq' do
     if Sidekiq::Queue.all.select{ |q| q.size > 50 }.any?
