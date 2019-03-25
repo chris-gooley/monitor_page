@@ -5,7 +5,7 @@ module MonitorPage
     layout 'monitor_page/application'
 
     def index
-      if MonitorPage.allowed_ips && !MonitorPage.allowed_ips.include?(request.remote_ip)
+      unless MonitorPage.ip_whitelisted?(request.remote_ip)
         render html: 'Forbidden' and return
       end
 

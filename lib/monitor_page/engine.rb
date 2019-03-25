@@ -6,7 +6,7 @@ module MonitorPage
   end
 
   class << self
-    attr_accessor :checks, :allowed_ips
+    attr_accessor :checks, :whitelisted_ips
 
     def checks
       @checks || []
@@ -23,12 +23,11 @@ module MonitorPage
     def permit(ips)
       ip_ranges = ips.is_a?(String) ? ips.split(/,\s?/) : ips
 
-      ip_ranges.each do |ip|
-        if ip.match(/-/)
+      self.whitelisted_ips = ip_ranges.map{|ip| IPAddr.new(ip) }
+    end
 
-        end
-      end
-      self.allowed_ips
+    def ip_whitelisted?(request_ip)
+      @whitelisted_ips.inject(false){|res,ip| ip.include?(IPAddr.new(request_ip)) or res }
     end
   end
 
