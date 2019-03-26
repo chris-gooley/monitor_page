@@ -6,7 +6,7 @@ module MonitorPage
 
     def index
       unless MonitorPage.ip_whitelisted?(request.remote_ip)
-        render html: 'Forbidden' and return
+        rails_specific_render 'Forbidden' and return
       end
 
       check_results = MonitorPage.checks.map{|c| c.call }
@@ -24,7 +24,17 @@ module MonitorPage
       results << "-----------"
       results << "Overall: #{overall_pass ? 'Passed' : 'Failed'}"
 
-      render html: results.join("<br/>").html_safe
+      rails_specific_render results.join("<br/>").html_safe
+    end
+
+    private
+
+    def rails_specific_render(str)
+      if Rails::VERSION::STRING[0] == '3'
+        render inline: str
+      else
+        render html: str
+      end
     end
   end
 end
