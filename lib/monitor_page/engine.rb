@@ -6,6 +6,7 @@ module MonitorPage
   end
 
   class << self
+    SERVICES = YAML.load_file(File.expand_path('services.yml', __FILE__))
     attr_accessor :checks, :whitelisted_ips
 
     def checks
