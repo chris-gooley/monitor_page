@@ -24,9 +24,11 @@ module MonitorPage
       ip_ranges = ips.is_a?(String) ? ips.split(/,\s?/) : ips
 
       self.whitelisted_ips = ip_ranges.map{|ip| IPAddr.new(ip) }
+      puts "Whitelisted IPs: #{self.whitelisted_ips}"
     end
 
     def ip_whitelisted?(request_ip)
+      return true if @whitelisted_ips.nil? || @whitelisted_ips.empty?
       @whitelisted_ips.inject(false){|res,ip| ip.include?(IPAddr.new(request_ip)) or res }
     end
   end
